@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
+import { AuthenGuard } from './core/guards/authen.guard';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { appRoutes } from './app.routes';
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [AuthenGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

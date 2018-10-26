@@ -41,8 +41,8 @@
             <td>{{item.Name}}</td>
             <td>{{item.Description}}</td>
             <td>
-              <button class="btn btn-primary" (click)="openEditModal(item.Id, template)"><i class="fa fa-pencil-square-o"></i></button>
-              <button class="btn btn-danger" (click)="deleteItem(item.Id)"><i class="fa fa-trash"></i></button>
+              <button *ngIf="item.Name !='Admin'" class="btn btn-primary" (click)="openEditModal(item.Id, template)"><i class="fa fa-pencil-square-o"></i></button>
+              <button *ngIf="item.Name !='Admin'" class="btn btn-danger" (click)="deleteItem(item.Id)"><i class="fa fa-trash"></i></button>
             </td>
           </tr>
         </tbody>

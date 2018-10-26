@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { AuthenGuard } from './core/guards/authen.guard';
 import { PaginationModule } from 'ngx-bootstrap';
-
 @NgModule({
   declarations: [
     AppComponent

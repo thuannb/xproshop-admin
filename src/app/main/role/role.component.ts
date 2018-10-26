@@ -21,7 +21,9 @@ export class RoleComponent implements OnInit {
   public entity: any;
   public tagModal: string = "Thêm mới";
 
-  constructor(private _dataService: DataService, private _notificationService: NotificationService, private modalService: BsModalService) { }
+  constructor(private _dataService: DataService,
+    private _notificationService: NotificationService,
+    private modalService: BsModalService) { }
 
   ngOnInit() {
     this.loadData()

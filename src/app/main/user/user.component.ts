@@ -7,7 +7,7 @@ import { AuthenService } from '../../core/services/authen.service';
 import { UtilityService } from '../../core/services/utility.service';
 import { MessageContstants } from '../../core/common/message.constants';
 import { SystemConstants } from '../../core/common/system.constants';
-
+import {NgForm} from '@angular/forms';
 import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
 declare var moment: any;
 
@@ -95,8 +95,8 @@ export class UserComponent implements OnInit {
     this.loadUserDetail(id);
     this.modalAddEdit.show();
   }
-  saveChange(valid: boolean) {
-    if (valid) {
+  saveChange(form: NgForm) {
+    if (form.valid) {
       this.entity.Roles = this.myRoles;
       let fi = this.avatar.nativeElement;
       if (fi.files.length > 0) {
@@ -104,20 +104,21 @@ export class UserComponent implements OnInit {
         .then((imageUrl: string) => {
           this.entity.Avatar = imageUrl;
         }).then(() => {
-          this.saveData();
+          this.saveData(form);
         });
       }
       else {
-        this.saveData();
+        this.saveData(form);
       }
     }
   }
-  private saveData() {
+  private saveData(form:NgForm) {
     if (this.entity.Id == undefined) {
       this._dataService.post('/api/appUser/add', JSON.stringify(this.entity))
         .subscribe((response: any) => {
           this.loadData();
           this.modalAddEdit.hide();
+          form.resetForm();
           this._notificationService.printSuccessMessage(MessageContstants.CREATED_OK_MSG);
         }, error => this._dataService.handleError(error));
     }
@@ -126,6 +127,7 @@ export class UserComponent implements OnInit {
         .subscribe((response: any) => {
           this.loadData();
           this.modalAddEdit.hide();
+          form.resetForm();
           this._notificationService.printSuccessMessage(MessageContstants.UPDATED_OK_MSG);
         }, error => this._dataService.handleError(error));
     }
